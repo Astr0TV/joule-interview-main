@@ -1,1 +1,84 @@
 
+### Comment Entity
+
+```typescript
+// comment.entity.ts
+import { User } from "../users/user.entity";
+
+export interface Comment {
+    id: number;
+    articleId: number;
+    userId: number;
+    content: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+### Comment Service
+// comments.service.ts
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "../../infrastructure/prisma/prisma.service";
+import { Comment } from "./comment.entity";
+
+@Injectable()
+export class CommentsService {
+    constructor(private prisma: PrismaService) {}
+
+    create = async (comment: Comment): Promise<Comment> => {
+        return this.prisma.comment.create({
+            data: { ...comment },
+        });
+    };
+
+    findByArticleId = async (articleId: number): Promise<Comment[]> => {
+        return this.prisma.comment.findMany({
+            where: { articleId },
+        });
+    };
+}
+ ### Comment Controller
+// comments.controller.ts
+import { Controller, Post, Body, Param, Get } from "@nestjs/common";
+import { CommentsService } from "./comments.service";
+import { Comment } from "./comment.entity";
+
+@Controller("articles/:articleId/comments")
+export class CommentsController {
+    constructor(private readonly commentsService: CommentsService) {}
+
+    @Post()
+    create(@Body() comment: Comment, @Param("articleId") articleId: number) {
+        return this.commentsService.create({ ...comment, articleId });
+    }
+
+    @Get()
+    findByArticleId(@Param("articleId") articleId: number) {
+        return this.commentsService.findByArticleId(articleId);
+    }
+}
+### Update Articles Module
+Modify the ArticlesModule to include the new CommentsModule:
+// articles.module.ts
+import { Module } from "@nestjs/common";
+import { ArticlesService } from "./articles.service";
+import { PrismaModule } from "../../infrastructure/prisma/prisma.module";
+import { NotificationsModule } from "../notifications/notifications.module";
+import { CommentsModule } from "../comments/comments.module";
+
+@Module({
+    providers: [ArticlesService],
+    imports: [PrismaModule, NotificationsModule, CommentsModule],
+    exports: [ArticlesService],
+})
+export class ArticlesModule {}
+### Comments Module
+Create a new module for comments:
+// comments.module.ts
+import { Module } from "@nestjs/common";
+import { CommentsService } from "./comments.service";
+import { CommentsController } from "./comments.controller";
+
+@Module({
+    providers: [CommentsService],
+    controllers: [CommentsController],
+})
+export class CommentsModule {}
