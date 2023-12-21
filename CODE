@@ -1,6 +1,4 @@
 ## Nouveau Schema Prisma avec des Commentaires:
-typescript
-Copy code
 // prisma/comment.model.prisma
 model Comment {
   id        Int      @id @default(autoincrement())
@@ -16,8 +14,6 @@ model Comment {
 }
 ## Objets de Mapping entre le Domaine et la Couche de Présentation:
 Comment Entity:
-typescript
-Copy code
 // comments/comment.entity.ts
 import { User } from "../users/user.entity";
 
@@ -30,8 +26,6 @@ export interface Comment {
     updatedAt: Date;
 }
 ## Comment Service:
-typescript
-Copy code
 // comments/comments.service.ts
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../../infrastructure/prisma/prisma.service";
@@ -54,8 +48,6 @@ export class CommentsService {
     };
 }
 ## Comment Controller:
-typescript
-Copy code
 // comments/comments.controller.ts
 import { Controller, Post, Body, Param, Get } from "@nestjs/common";
 import { CommentsService } from "./comments.service";
@@ -76,8 +68,6 @@ export class CommentsController {
     }
 }
 ## Mise à jour du Module Articles:
-typescript
-Copy code
 // articles/articles.module.ts
 import { Module } from "@nestjs/common";
 import { ArticlesService } from "./articles.service";
@@ -92,8 +82,6 @@ import { CommentsModule } from "../comments/comments.module";
 })
 ## export class ArticlesModule {}
 Module Commentaires:
-typescript
-Copy code
 // comments/comments.module.ts
 import { Module } from "@nestjs/common";
 import { CommentsService } from "./comments.service";
@@ -105,8 +93,6 @@ import { CommentsController } from "./comments.controller";
 })
 ## export class CommentsModule {}
 PrismaModule:
-typescript
-Copy code
 // infrastructure/prisma/prisma.module.ts
 import { Module } from "@nestjs/common";
 import { PrismaService } from "./prisma.service";
@@ -117,8 +103,6 @@ import { PrismaService } from "./prisma.service";
 })
 export class PrismaModule {}
 ## PrismaService:
-typescript
-Copy code
 // infrastructure/prisma/prisma.service.ts
 import { Injectable } from "@nestjs/common";
 import { PrismaClient } from "@prisma/client";
