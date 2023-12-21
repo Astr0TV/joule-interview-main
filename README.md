@@ -1,104 +1,129 @@
-# Project Good Practices:
+# Project Good Practices
 
-**1. Modular Structure:**  
-The project follows a modular structure, enhancing readability and maintainability. Each feature or module resides in its own directory.
+## Modular Structure
 
-**2. Use of DTOs (Data Transfer Objects):**  
-DTOs are utilized for request and response objects. This practice aids in data validation, providing a clear contract between different parts of the application.
+### Relevant Code
+- ArticlesModule in articles.module.ts
 
-**3. Dependency Injection:**  
-NestJS's dependency injection is employed throughout the codebase, making it easier to manage dependencies and facilitating the creation of testable code.
+## Use of DTOs (Data Transfer Objects)
 
-**4. Middleware Usage:**  
-Middleware is wisely used for logging, addressing cross-cutting concerns and ensuring a clean separation of concerns.
+### Relevant Code
+- ArticleDto, CreateArticleDto, UpdateArticleDto in article.dto.ts
 
-**5. Error Handling Middleware:**  
-The presence of error handling middleware is crucial for gracefully managing errors and delivering meaningful responses to users.
+## Dependency Injection
 
-**6. Validation Pipes:**  
-Validation pipes contribute to code reliability by enforcing input validation.
+### Relevant Code
+- Throughout the ArticlesService and other services where dependencies are injected.
 
-# Code Quality Refactoring:
+## Middleware Usage
 
-**1. Consistent Naming:**  
-Ensure consistent naming conventions across the entire codebase to improve readability and maintainability.
+### Relevant Code
+- Not explicitly shown in the provided code. Middleware would typically be implemented in a separate middleware file or within NestJS interceptors.
 
-**2. Code Duplication:**  
-Identify and eliminate redundant or duplicated code to enhance maintainability and reduce the chances of introducing bugs.
+## Error Handling Middleware
 
-**3. Enhanced Logging:**  
-Add more informative logging, especially in critical areas of the code, to aid in debugging and monitoring.
+### Relevant Code
+- Not explicitly shown. Error handling middleware would be implemented separately.
 
-**4. Unit Tests:**  
-Expand test coverage to ensure critical parts of the application are well-tested, helping catch issues early in development.
+## Validation Pipes
 
-**5. Use of Interfaces:**  
-Define interfaces for DTOs and other complex objects to enforce a clear contract and improve code understanding.
+### Relevant Code
+- Validation is handled in the ArticlesController using DTOs.
 
-# CI/CD Improvement:
+## Code Quality Refactoring
 
-**1. Automated Testing:**  
-Integrate automated tests into the CI/CD pipeline to catch bugs early and prevent the introduction of regressions.
+### Consistent Naming
 
-**2. Static Code Analysis:**  
-Introduce static code analysis tools to catch potential issues and enforce coding standards.
+#### Relevant Code
+- Throughout the entire codebase.
 
-**3. Code Reviews:**  
-Strengthen the code review process to catch issues that automated tools might miss and ensure that best practices are followed.
+### Code Duplication
 
-**4. Continuous Monitoring:**  
-Implement tools for continuous monitoring of the application in production to identify and address issues promptly.
+#### Relevant Code
+- Not explicitly shown. It would be identified and addressed in various parts of the codebase.
 
-# Developer Experience (DevX) Enhancement:
+### Enhanced Logging
 
-**1. Documentation:**  
-Improve and maintain comprehensive documentation for developers to understand the architecture, APIs, and deployment processes.
+#### Relevant Code
+- Logging improvements would be implemented throughout critical areas in the services.
 
-**2. Automated Setup:**  
-Provide scripts or automation for setting up the development environment, dependencies, and database schema to reduce onboarding time.
+### Unit Tests
 
-**3. Live Reload:**  
-Implement tools or configurations that enable live reload during development to speed up the feedback loop.
+#### Relevant Code
+- ArticlesService unit tests in articles.service.spec.ts.
 
-**4. Swagger/OpenAPI:**  
-If not already done, consider integrating Swagger or OpenAPI for automatic API documentation generation.
+### Use of Interfaces
 
-# Security Improvements:
+#### Relevant Code
+- Interfaces are used for Article and MutableArticle.
 
-**1. Input Validation:**  
-Strengthen input validation by using validation pipes and ensuring that all user inputs are properly sanitized.
+## CI/CD Improvement
 
-**2. Authentication and Authorization:**  
-Review and enhance the authentication and authorization mechanisms, ensuring that sensitive endpoints are appropriately protected.
+### Automated Testing
 
-**3. Dependency Scanning:**  
-Regularly scan dependencies for known security vulnerabilities and update dependencies accordingly.
+#### Relevant Code
+- Integration of automated tests is suggested but not explicitly shown.
 
-**4. Data Encryption:**  
-If handling sensitive data, ensure that data at rest and in transit is properly encrypted.
+### Static Code Analysis
 
-# Adding a Commenting Feature:
+#### Relevant Code
+- Not explicitly shown. This would involve tools like ESLint or TSLint.
 
-**Database Schema:**  
-Add a Comment entity to the database schema with appropriate relationships to articles.
+### Code Reviews
 
-**API Endpoints:**  
-Create API endpoints for adding, fetching, updating, and deleting comments.
+#### Relevant Code
+- Emphasized as a practice but not explicitly shown in the code.
 
-**DTOs:**  
-Define DTOs for comment-related operations.
+### Continuous Monitoring
 
-**Authentication:**  
-Ensure that only authenticated users can add comments.
+#### Relevant Code
+- Not explicitly shown. This involves tools for monitoring in the production environment.
 
-**Validation:**  
-Implement validation for comment content length, format, etc.
+## Developer Experience (DevX) Enhancement
 
-**Notifications:**  
-Consider adding a notification system for notifying article authors or other relevant parties when a new comment is added.
+### Documentation
 
-**Testing:**  
-Develop unit and integration tests for the new commenting feature.
+#### Relevant Code
+- Documentation improvements would be applied throughout the codebase.
 
-**Documentation:**  
-Update API documentation to include details about the new commenting feature, including usage and endpoints.
+### Automated Setup
+
+#### Relevant Code
+- Automated setup scripts are suggested but not explicitly shown.
+
+### Live Reload
+
+#### Relevant Code
+- Live reload configurations would be implemented but not explicitly shown.
+
+### Swagger/OpenAPI
+
+#### Relevant Code
+- Swagger/OpenAPI integration is suggested but not shown.
+
+## Security Improvements
+
+### Input Validation
+
+#### Relevant Code
+- Handled through validation pipes in ArticlesController.
+
+### Authentication and Authorization
+
+#### Relevant Code
+- Authentication handled in JwtStrategy and AuthService.
+
+### Dependency Scanning
+
+#### Relevant Code
+- Dependency scanning is suggested but not explicitly shown.
+
+### Data Encryption
+
+#### Relevant Code
+- Not explicitly shown. Would involve encrypting sensitive data.
+
+## Adding a Commenting Feature
+
+### Relevant Code
+- The code for adding a commenting feature is not provided, but suggestions are given for database schema, API endpoints, DTOs, authentication, validation, notifications, testing, and documentation.
