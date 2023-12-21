@@ -1,8 +1,18 @@
-
-### Comment Entity
-
-```typescript
-// comment.entity.ts
+## Nouveau Schema Prisma avec des Commentaires:
+// prisma/comment.model.prisma
+model Comment {
+  id        Int      @id @default(autoincrement())
+  articleId Int
+  userId    Int
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
+  Article   Article  @relation(fields: [articleId], references: [id])
+}
+## Objets de Mapping entre le Domaine et la Couche de Présentation:
+Comment Entity:
+// comments/comment.entity.ts
 import { User } from "../users/user.entity";
 
 export interface Comment {
@@ -13,8 +23,8 @@ export interface Comment {
     createdAt: Date;
     updatedAt: Date;
 }
-### Comment Service
-// comments.service.ts
+## Comment Service:
+// comments/comments.service.ts
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../../infrastructure/prisma/prisma.service";
 import { Comment } from "./comment.entity";
@@ -35,8 +45,8 @@ export class CommentsService {
         });
     };
 }
- ### Comment Controller
-// comments.controller.ts
+## Comment Controller:
+// comments/comments.controller.ts
 import { Controller, Post, Body, Param, Get } from "@nestjs/common";
 import { CommentsService } from "./comments.service";
 import { Comment } from "./comment.entity";
@@ -55,9 +65,8 @@ export class CommentsController {
         return this.commentsService.findByArticleId(articleId);
     }
 }
-### Update Articles Module
-Modify the ArticlesModule to include the new CommentsModule:
-// articles.module.ts
+## Mise à jour du Module Articles:
+// articles/articles.module.ts
 import { Module } from "@nestjs/common";
 import { ArticlesService } from "./articles.service";
 import { PrismaModule } from "../../infrastructure/prisma/prisma.module";
@@ -70,9 +79,8 @@ import { CommentsModule } from "../comments/comments.module";
     exports: [ArticlesService],
 })
 export class ArticlesModule {}
-### Comments Module
-Create a new module for comments:
-// comments.module.ts
+## Module Commentaires:
+// comments/comments.module.ts
 import { Module } from "@nestjs/common";
 import { CommentsService } from "./comments.service";
 import { CommentsController } from "./comments.controller";
